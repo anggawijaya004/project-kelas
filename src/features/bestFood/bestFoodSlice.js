@@ -1,10 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getBestFood = createAsyncThunk("list-menu/best-food", async () => {
-  const response = await axios.get(
-    "https://ig-food-menus.herokuapp.com/best-foods"
-  );
+export const getBestFood = createAsyncThunk("list-food/best-food", async () => {
+  const response = await axios.get("https://ig-food-menus.herokuapp.com/best-foods");
   return response.data;
 });
 
@@ -17,14 +15,14 @@ export const bestFoodSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getBestFood.pending, (state, actions) => {
+      .addCase(getBestFood.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(getBestFood.fulfilled, (state, actions) => {
+      .addCase(getBestFood.fulfilled, (state, action) => {
         state.status = "success";
-        state.data = actions.payload;
+        state.data = action.payload;
       });
   },
 });
 
-export default bestFoodSlice.reducer
+export default bestFoodSlice.reducer;

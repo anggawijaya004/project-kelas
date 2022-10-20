@@ -1,14 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getBurger = createAsyncThunk("list-menu/burgers", async () => {
-  const response = await axios.get(
-    "https://ig-food-menus.herokuapp.com/burgers"
-  );
+export const getBurger = createAsyncThunk("list-food/burger", async () => {
+  const response = await axios.get("https://ig-food-menus.herokuapp.com/burgers");
   return response.data;
 });
 
-export const BurgerSlice = createSlice({
+export const burgerSlice = createSlice({
   name: "burger",
   initialState: {
     status: "idle",
@@ -17,14 +15,14 @@ export const BurgerSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(getBurger.pending, (state, actions) => {
+      .addCase(getBurger.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(getBurger.fulfilled, (state, actions) => {
+      .addCase(getBurger.fulfilled, (state, action) => {
         state.status = "success";
-        state.data = actions.payload;
+        state.data = action.payload;
       });
   },
 });
 
-export default BurgerSlice.reducer
+export default burgerSlice.reducer;

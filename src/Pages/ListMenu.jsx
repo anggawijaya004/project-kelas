@@ -9,14 +9,11 @@ import Layout from "../Layout";
 export default function ListMenu() {
   const [tab, setTab] = useState(0);
 
-  const handleClick = (newVal) => {
-    setTab(newVal);
-  };
   return (
     <Layout>
-      <Container className="mt-5">
-        <h1>List Menu</h1>
-        <Tabs  tab={tab} handleClick={handleClick} />
+      <Container>
+        <h1 className="my-5">List Menu</h1>
+        <Tabs tab={tab} setTab={setTab} />
         {tab === 0 && <BestFood />}
         {tab === 1 && <Burger />}
       </Container>

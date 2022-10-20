@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Row, Col, Spinner } from "reactstrap";
-import CardFood from "../../components/Card";
+import { Container, Row, Col } from "reactstrap";
+import CardFood from "../../components/CardFood";
 import { getBurger } from "./burgerSlice";
 
 export default function Burger() {
@@ -16,20 +16,18 @@ export default function Burger() {
   }, [status]);
 
   if (status === "loading") {
-    return <Spinner>Loading...</Spinner>;
+    return <div>loading . . .</div>;
   }
 
   return (
-    <>
-      <Container>
-        <Row className="gy-3">
-          {data.map((item, i) => (
-            <Col xs="6" md="4" lg="3" key={i}>
-              <CardFood data={item} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
-    </>
+    <Container>
+      <Row>
+        {data.map((item, i) => (
+          <Col key={i} xs="6" md="4" lg="3">
+            <CardFood item={item} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 }
